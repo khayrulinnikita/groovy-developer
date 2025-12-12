@@ -42,3 +42,6 @@ jobs:
 
       - name: Build fat jar with Gradle
         run: ./gradlew shadow --info
+
+      - name: Run custom gradle task for XLSX build
+        run: ./gradlew runGroovyScript

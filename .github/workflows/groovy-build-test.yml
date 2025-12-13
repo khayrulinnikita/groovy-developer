@@ -40,8 +40,14 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Run all test
+        run: ./gradlew test
+
       - name: Build fat jar with Gradle
         run: ./gradlew shadow --info
 
       - name: Run custom gradle task for XLSX build
         run: ./gradlew runGroovyScript
+
+      - name: Run ServerConfig
+        run: ./gradlew runServerConfig

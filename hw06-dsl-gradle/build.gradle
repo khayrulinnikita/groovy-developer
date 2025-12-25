@@ -1,0 +1,34 @@
+plugins {
+    id 'groovy'
+}
+
+group = 'io.github.khayrulinnikita'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.14'
+    testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register('runServerConfig', JavaExec) {
+    group = 'build'
+    mainClass = 'groovy.lang.GroovyShell'
+    classpath = sourceSets.main.runtimeClasspath
+    def scriptPath = new File(project.projectDir, "src/main/groovy/io/github/khayrulinnikita/Main.groovy")
+    args '-e', scriptPath.text
+}
+
+tasks.named("build") {
+    dependsOn "runServerConfig"
+}

@@ -51,3 +51,6 @@ jobs:
 
       - name: Run ServerConfig
         run: ./gradlew runServerConfig
+
+      - name: Run generateModel gradle task
+        run: ./gradlew generateModel
